@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# player class
+# game class to handle game logic
 class Game
   attr_accessor :player1, :player2, :chances, :current_player
   def initialize
@@ -24,16 +24,7 @@ class Game
   def ask_questions
     puts "\n=========== new turn ========\n"
     puts "#{current_player.name} get ready. Its your turn.\n"
-    question = Question.new
-    p question.ask
-    print '>'
-    answer = gets.chomp
-    if question.check_answer?(answer)
-      puts "Yes #{current_player.name}, you are absolutely correct.\n"
-    else
-      puts "Seriously #{current_player.name}? It's Wrong."
-      current_player.lose_chance
-    end
+    ask_question
     print_score
     toggle_players
   end
@@ -62,5 +53,18 @@ class Game
                       else
                         @player1
                       end
+  end
+
+  def confirm_answer
+    question = Question.new
+    p question.ask
+    print '>'
+    answer = gets.chomp
+    if question.check_answer?(answer)
+      puts "Yes #{current_player.name}, you are absolutely correct.\n"
+    else
+      puts "Seriously #{current_player.name}? It's Wrong."
+      current_player.lose_chance
+    end
   end
 end

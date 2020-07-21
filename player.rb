@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Player class to handle players
 class Player
   attr_accessor :chances, :name
   def initialize(name, chances)
